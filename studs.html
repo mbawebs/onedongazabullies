@@ -8,31 +8,103 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="demo">DEMO WEBSITE CONCEPT — CREATED FOR ONE DON GAZA BULLIES</div>
+
 <nav class="nav">
-  <a class="nav-brand" href="index.html"><img src="assets/hero/logo.png" alt="One Don Gaza Bullies Logo"><span>ONE DON GAZA BULLIES</span></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="studs.html" class="active">Studs</a>
-    <a href="females.html">Females</a>
-    <a href="productions.html">Productions</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="contact.html">Contact</a>
-  </div>
+  <a class="nav-brand" href="index.html">
+    <img src="assets/hero/logo.png" alt="One Don Gaza Bullies Logo">
+    <span>ONE DON GAZA BULLIES</span>
+  </a>
+
+  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
-<header class="page-hero"><div class="badge">STUD LINEUP</div><h1>STUDS</h1><p class="sub">Available stud presentation for One Don Gaza Bullies.</p></header>
-<section class="dog-section"><div class="dog-list"><div class="dog-card"><div class="dog-img" onclick="openLightbox('black_rhyno',0)"><img src="assets/studs/black_rhyno1.png" alt="ODGB/GB Black Rhyno"></div><div class="dog-info"><h3>ODGB/GB<br>BLACK RHYNO</h3><div class="lineage">PBK Hellboy × GB Mystic</div><p>Black Rhyno is out of PBK Hellboy and GB Mystic. Compact, powerful and built with the bully expression, bone and structure that represent the direction of the One Don Gaza Bullies breeding program.</p><div class="click-hint">Click image to view full gallery</div><br><br><a class="btn gold" href="contact.html">Contact For Stud Info</a></div></div></div></section>
+
+<div class="menu-overlay"></div>
+
+<aside class="menu-panel">
+  <button class="menu-close" onclick="closeMenu()" aria-label="Close menu">×</button>
+
+  <div class="menu-title">ONE DON GAZA BULLIES</div>
+
+  <a href="index.html" onclick="closeMenu()">Home</a>
+
+  <div class="menu-group">
+    <a href="studs.html" onclick="closeMenu()">Studs</a>
+    <div class="submenu">
+      <a href="studs.html" onclick="closeMenu()">Black Rhyno</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <a href="females.html" onclick="closeMenu()">Females</a>
+    <div class="submenu">
+      <a href="females.html" onclick="closeMenu()">GB Mystic</a>
+      <a href="females.html" onclick="closeMenu()">VMB Celine</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <a href="productions.html" onclick="closeMenu()">Productions</a>
+    <div class="submenu">
+      <a href="productions.html" onclick="closeMenu()">Diplomat</a>
+      <a href="productions.html" onclick="closeMenu()">Wizard</a>
+      <a href="productions.html" onclick="closeMenu()">Spice</a>
+    </div>
+  </div>
+
+  <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</aside>
+
+<header class="page-hero">
+  <div class="badge">STUD LINEUP</div>
+  <h1>STUDS</h1>
+  <p class="sub">Available stud presentation for One Don Gaza Bullies.</p>
+</header>
+
+<section class="dog-section">
+  <div class="dog-list">
+    <div class="dog-card">
+      <div class="dog-img" onclick="openLightbox('black_rhyno',0)">
+        <img src="assets/studs/black_rhyno1.png" alt="ODGB/GB Black Rhyno">
+      </div>
+
+      <div class="dog-info">
+        <h3>ODGB/GB<br>BLACK RHYNO</h3>
+        <div class="lineage">PBK Hellboy × GB Mystic</div>
+
+        <p>
+          Black Rhyno is out of PBK Hellboy and GB Mystic. Compact, powerful and built with the bully expression, bone and structure that represent the direction of the One Don Gaza Bullies breeding program.
+        </p>
+
+        <div class="click-hint">Click image to view full gallery</div>
+
+        <br><br>
+        <a class="btn gold" href="contact.html">Contact For Stud Info</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <strong>ONE DON GAZA BULLIES</strong><br>
   Brodheadsville, Pennsylvania<br>
   Demo Website Concept
 </footer>
+
 <div class="lightbox" id="lightbox">
   <button class="close" onclick="closeLightbox()">×</button>
   <button class="arrow left" onclick="prevImage()">‹</button>
   <img id="lightboxImg" src="" alt="">
   <button class="arrow right" onclick="nextImage()">›</button>
 </div>
+
 <script src="script.js"></script>
+
 </body>
 </html>
