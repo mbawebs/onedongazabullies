@@ -12,12 +12,66 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">  
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<style>
+.waitlist-box{
+  margin-top:32px;
+  padding:28px;
+  border:1px solid rgba(214,173,47,.35);
+  background:rgba(0,0,0,.35);
+  border-radius:18px;
+}
+.waitlist-box h3{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2rem,5vw,4rem);
+  margin:0 0 10px;
+  color:#d6ad2f;
+  letter-spacing:1px;
+}
+.waitlist-box p{
+  margin:0 0 22px;
+  opacity:.85;
+}
+.waitlist-form{
+  display:grid;
+  gap:14px;
+}
+.waitlist-form input{
+  width:100%;
+  padding:15px 16px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font:inherit;
+}
+.waitlist-form input::placeholder{
+  color:rgba(255,255,255,.55);
+}
+.waitlist-form button{
+  padding:15px 18px;
+  border:0;
+  border-radius:12px;
+  background:#d6ad2f;
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.waitlist-message{
+  margin-top:14px;
+  font-weight:800;
+}
+</style>
 </head>
+
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
 </script>  
+
 <body>
 
 <div class="demo">DEMO WEBSITE CONCEPT — CREATED FOR ONE DON GAZA BULLIES</div>
@@ -104,6 +158,20 @@ if ("serviceWorker" in navigator) {
         <span class="icon">FB</span> Facebook
       </a>
     </div>
+
+    <div class="waitlist-box">
+      <h3>JOIN OUR WAITLIST</h3>
+      <p>Be the first to know about upcoming breedings, available puppies, and exclusive updates.</p>
+
+      <form class="waitlist-form" id="waitlistForm">
+        <input type="text" id="waitlistName" placeholder="Your name" required>
+        <input type="email" id="waitlistEmail" placeholder="Your email" required>
+        <input type="tel" id="waitlistPhone" placeholder="Phone number optional">
+        <button type="submit" id="waitlistBtn">Join Waitlist</button>
+      </form>
+
+      <div class="waitlist-message" id="waitlistMessage"></div>
+    </div>
   </div>
 </section>
 
@@ -121,6 +189,47 @@ if ("serviceWorker" in navigator) {
 </div>
 
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "PEGA_AQUI_TU_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "PEGA_AQUI_TU_ANON_KEY";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const waitlistForm = document.getElementById("waitlistForm");
+const waitlistBtn = document.getElementById("waitlistBtn");
+const waitlistMessage = document.getElementById("waitlistMessage");
+
+waitlistForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("waitlistName").value.trim();
+  const email = document.getElementById("waitlistEmail").value.trim();
+  const phone = document.getElementById("waitlistPhone").value.trim();
+
+  waitlistBtn.disabled = true;
+  waitlistBtn.textContent = "Submitting...";
+  waitlistMessage.textContent = "";
+
+  const { error } = await supabaseClient
+    .from("waitlist")
+    .insert([{ name, email, phone, source: "contact_page" }]);
+
+  if (error) {
+    waitlistMessage.style.color = "#ff6b6b";
+    waitlistMessage.textContent = "Something went wrong. Please try again.";
+    console.error(error);
+  } else {
+    waitlistMessage.style.color = "#d6ad2f";
+    waitlistMessage.textContent = "Thanks! You've been added to our waitlist.";
+    waitlistForm.reset();
+  }
+
+  waitlistBtn.disabled = false;
+  waitlistBtn.textContent = "Join Waitlist";
+});
+</script>
 
 </body>
 </html>
